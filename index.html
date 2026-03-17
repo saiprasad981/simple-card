@@ -17,7 +17,9 @@
         align-items: center;
         padding: 24px;
         font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(135deg, #0f172a, #1e293b 55%, #111827);
+        background:
+          radial-gradient(circle at top, rgba(138, 43, 226, 0.25), transparent 30%),
+          linear-gradient(135deg, #0f172a, #1e293b 55%, #111827);
       }
 
       .premium-watch {
@@ -25,10 +27,21 @@
         min-height: 620px;
         padding: 24px;
         border-radius: 18px;
-        background: #d5d4d4;
+        background: linear-gradient(180deg, #e5e5e5, #d5d4d4);
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto auto auto auto 1fr;
+        gap: 0;
+        overflow: hidden;
+        transform: translateY(24px);
+        opacity: 0;
+        animation: card-in 0.8s ease forwards;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      .premium-watch:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
       }
 
       .premium-watch img {
@@ -37,6 +50,12 @@
         object-fit: cover;
         border-radius: 14px;
         margin-bottom: 20px;
+        transition: transform 0.45s ease, filter 0.45s ease;
+      }
+
+      .premium-watch:hover img {
+        transform: scale(1.03);
+        filter: saturate(1.08);
       }
 
       h1 {
@@ -45,6 +64,7 @@
         font-size: 1.9rem;
         line-height: 1.2;
         text-align: center;
+        animation: fade-up 0.7s ease 0.15s both;
       }
 
       .description {
@@ -53,6 +73,7 @@
         font-size: 1rem;
         line-height: 1.6;
         text-align: center;
+        animation: fade-up 0.7s ease 0.28s both;
       }
 
       .price {
@@ -61,6 +82,7 @@
         font-size: 1.5rem;
         font-weight: 700;
         text-align: center;
+        animation: fade-up 0.7s ease 0.4s both;
       }
 
       .button-row {
@@ -70,10 +92,11 @@
         align-items: flex-end;
         gap: 12px;
         padding-top: 28px;
+        animation: fade-up 0.7s ease 0.52s both;
       }
 
       button {
-        min-width: 140px;
+        flex: 1;
         padding: 12px 16px;
         border: none;
         border-radius: 8px;
@@ -82,11 +105,15 @@
         font-weight: 600;
         cursor: pointer;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease, background-color 0.3s ease-in-out;
+        transition:
+          transform 0.25s ease,
+          background-color 0.3s ease-in-out,
+          box-shadow 0.3s ease;
       }
 
       button:hover {
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
       }
 
       .buy-now {
@@ -103,6 +130,28 @@
 
       .add-to-cart:hover {
         background-color: #0f3570;
+      }
+
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @media (max-width: 480px) {
